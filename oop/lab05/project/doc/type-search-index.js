@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"edu.java.lab5","l":"EmptyQueryException"},{"p":"edu.java.lab5","l":"IssueList"},{"p":"edu.java.lab5","l":"ShortNameException"}];updateSearchResults();

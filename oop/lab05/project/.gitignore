@@ -1,4 +1,1 @@
-target/
-logs/
-reports/out/
-.settings/
+bin/
