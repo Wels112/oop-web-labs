@@ -38,6 +38,8 @@ Linux и macOS:
 | `librarian` | `lib123` | библиотекарь: смотрит, добавляет, изменяет, удаляет |
 | `reader` | `read123` | читатель: только смотрит |
 
+Подробный разбор каждой работы: [docs/LABS.md](docs/LABS.md). Запуск в Eclipse: [docs/ECLIPSE.md](docs/ECLIPSE.md).
+
 Тесты: `./mvnw test` (28 тестов: JUnit 5 и Mockito). Документация Javadoc: `./mvnw javadoc:javadoc`,
 результат в `target/reports/apidocs`. Файл для отдельного Tomcat (Web 2): `./mvnw package`, результат `target/issues.war`.
 
