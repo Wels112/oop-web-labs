@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ООП, лабораторная работа № 7. Шаблон 2 (HTML): альбомная страница,
+     записи сгруппированы по читателям, книги на руках выделены цветом.
+     Оформление и расположение данных отличаются от шаблона issues_pdf. -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="issues_html" pageWidth="842" pageHeight="595" orientation="Landscape"
+              columnWidth="780" leftMargin="31" rightMargin="31" topMargin="30" bottomMargin="30">
+
+  <style name="base" isDefault="true" fontName="DejaVu Sans" fontSize="10"
+         pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+  <style name="state" style="base">
+    <conditionalStyle>
+      <conditionExpression><![CDATA["Нет".equals($F{returned})]]></conditionExpression>
+      <style forecolor="#B3261E" isBold="true"/>
+    </conditionalStyle>
+  </style>
+
+  <field name="reader" class="java.lang.String"><fieldDescription><![CDATA[reader]]></fieldDescription></field>
+  <field name="book" class="java.lang.String"><fieldDescription><![CDATA[book]]></fieldDescription></field>
+  <field name="issued" class="java.lang.String"><fieldDescription><![CDATA[issued]]></fieldDescription></field>
+  <field name="due" class="java.lang.String"><fieldDescription><![CDATA[due]]></fieldDescription></field>
+  <field name="returned" class="java.lang.String"><fieldDescription><![CDATA[returned]]></fieldDescription></field>
+
+  <variable name="readerCount" class="java.lang.Integer" resetType="Group" resetGroup="byReader" calculation="Count">
+    <variableExpression><![CDATA[$F{book}]]></variableExpression>
+  </variable>
+
+  <group name="byReader">
+    <groupExpression><![CDATA[$F{reader}]]></groupExpression>
+    <groupHeader>
+      <band height="30">
+        <textField>
+          <reportElement x="0" y="6" width="780" height="22" style="base" mode="Opaque" backcolor="#E4EEF2"/>
+          <textElement verticalAlignment="Middle"><font size="12" isBold="true"/><paragraph leftIndent="6"/></textElement>
+          <textFieldExpression><![CDATA["Читатель: " + $F{reader}]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupHeader>
+    <groupFooter>
+      <band height="22">
+        <textField>
+          <reportElement x="0" y="2" width="780" height="18" style="base" forecolor="#5B6B75"/>
+          <textElement textAlignment="Right"><font size="9" isItalic="true"/></textElement>
+          <textFieldExpression><![CDATA["Выдач у читателя: " + $V{readerCount}]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupFooter>
+  </group>
+
+  <title>
+    <band height="46">
+      <staticText>
+        <reportElement x="0" y="0" width="780" height="28" style="base"/>
+        <textElement><font size="20" isBold="true"/></textElement>
+        <text><![CDATA[Выдачи книг по читателям]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="0" y="28" width="780" height="16" style="base" forecolor="#5B6B75"/>
+        <text><![CDATA[Красным выделены книги, которые ещё не возвращены]]></text>
+      </staticText>
+    </band>
+  </title>
+
+  <detail>
+    <band height="20">
+      <textField><reportElement x="16" y="0" width="300" height="20" style="base"/><textFieldExpression><![CDATA[$F{book}]]></textFieldExpression></textField>
+      <textField><reportElement x="330" y="0" width="140" height="20" style="base"/><textFieldExpression><![CDATA["выдана " + $F{issued}]]></textFieldExpression></textField>
+      <textField><reportElement x="480" y="0" width="160" height="20" style="base"/><textFieldExpression><![CDATA["вернуть до " + $F{due}]]></textFieldExpression></textField>
+      <textField>
+        <reportElement x="650" y="0" width="130" height="20" style="state"/>
+        <textFieldExpression><![CDATA["Да".equals($F{returned}) ? "возвращена" : "НА РУКАХ"]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+
+  <pageFooter>
+    <band height="18">
+      <textField>
+        <reportElement x="0" y="2" width="780" height="14" style="base" forecolor="#5B6B75"/>
+        <textElement textAlignment="Right"><font size="8"/></textElement>
+        <textFieldExpression><![CDATA["Страница " + $V{PAGE_NUMBER}]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageFooter>
+</jasperReport>

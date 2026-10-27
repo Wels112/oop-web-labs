@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GWT: Картотека выдач</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Web, лабораторная работа № 8: скрипт, который собрал компилятор GWT из пакета gwt.client -->
+  <script type="text/javascript" src="gwt-app/issuegwt/issuegwt.nocache.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="top-in">
+      <a class="brand" href="./">Картотека выдач</a>
+      <nav class="nav" aria-label="Основное меню">
+        <a href="./">Главная</a>
+        <a href="issues">Выдачи</a>
+        <a href="gwt.html" aria-current="page">GWT</a>
+      </nav>
+    </div>
+  </header>
+  <main class="page narrow">
+    <h1>Книги читателя (GWT)</h1>
+    <p>Страница собрана компилятором GWT из Java-кода. Читатели и книги приходят с сервера вызовом GWT-RPC.</p>
+    <noscript><p class="note err">Для работы страницы нужен JavaScript.</p></noscript>
+    <div id="gwtContainer"></div>
+  </main>
+</body>
+</html>

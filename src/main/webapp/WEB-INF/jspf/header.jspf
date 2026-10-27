@@ -1,0 +1,48 @@
+<%-- Общая шапка страниц (Web, лабораторная работа № 5). Перед подключением страница
+     задаёт переменные pageTitle (ключ заголовка) и active (пункт меню). --%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+<fmt:setBundle basename="messages"/>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<!DOCTYPE html>
+<html lang="${locale.language}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><fmt:message key="${pageTitle}"/>: <fmt:message key="app.name"/></title>
+  <link rel="icon" href="${ctx}/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="${ctx}/css/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="${ctx}/"><fmt:message key="app.name"/></a>
+    <nav class="nav" aria-label="Основное меню">
+      <a href="${ctx}/"<c:if test="${active == 'home'}"> aria-current="page"</c:if>><fmt:message key="nav.home"/></a>
+      <a href="${ctx}/issues"<c:if test="${active == 'issues'}"> aria-current="page"</c:if>><fmt:message key="nav.issues"/></a>
+      <a href="${ctx}/ask-reader"<c:if test="${active == 'ask'}"> aria-current="page"</c:if>><fmt:message key="nav.ask"/></a>
+      <a href="${ctx}/servlet/issues"><fmt:message key="nav.servlet"/></a>
+      <a href="${ctx}/gwt.html"><fmt:message key="nav.gwt"/></a>
+      <a href="${ctx}/about.jsp"<c:if test="${active == 'about'}"> aria-current="page"</c:if>><fmt:message key="nav.about"/></a>
+    </nav>
+    <div class="who">
+      <span class="lang">
+        <a href="?lang=ru"<c:if test="${locale.language == 'ru'}"> aria-current="true"</c:if>>RU</a>
+        <a href="?lang=en"<c:if test="${locale.language == 'en'}"> aria-current="true"</c:if>>EN</a>
+      </span>
+      <c:choose>
+        <c:when test="${not empty sessionScope.user}">
+          <span><c:out value="${sessionScope.user}"/> (<fmt:message key="nav.role.${sessionScope.role}"/>)</span>
+          <form method="post" action="${ctx}/logout">
+            <button class="btn quiet small" type="submit"><fmt:message key="nav.logout"/></button>
+          </form>
+        </c:when>
+        <c:otherwise>
+          <a class="btn quiet small" href="${ctx}/login"><fmt:message key="nav.login"/></a>
+        </c:otherwise>
+      </c:choose>
+    </div>
+  </div>
+</header>
+<main class="page">

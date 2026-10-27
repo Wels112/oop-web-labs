@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues>
+  <issue>
+    <reader>Иванов Пётр</reader>
+    <book>Три мушкетёра</book>
+    <issued>05.09.2026</issued>
+    <due>05.10.2026</due>
+    <returned>Да</returned>
+  </issue>
+  <issue>
+    <reader>Смирнова Анна</reader>
+    <book>Война и мир</book>
+    <issued>12.09.2026</issued>
+    <due>12.10.2026</due>
+    <returned>Нет</returned>
+  </issue>
+  <issue>
+    <reader>Иванов Пётр</reader>
+    <book>Анна Каренина</book>
+    <issued>20.09.2026</issued>
+    <due>20.10.2026</due>
+    <returned>Нет</returned>
+  </issue>
+  <issue>
+    <reader>Кузнецов Илья</reader>
+    <book>Три мушкетёра</book>
+    <issued>25.09.2026</issued>
+    <due>25.10.2026</due>
+    <returned>Нет</returned>
+  </issue>
+  <issue>
+    <reader>Смирнова Анна</reader>
+    <book>Мастер и Маргарита</book>
+    <issued>01.10.2026</issued>
+    <due>01.11.2026</due>
+    <returned>Нет</returned>
+  </issue>
+  <issue>
+    <reader>Кузнецов Илья</reader>
+    <book>Евгений Онегин</book>
+    <issued>03.10.2026</issued>
+    <due>03.11.2026</due>
+    <returned>Да</returned>
+  </issue>
+</issues>

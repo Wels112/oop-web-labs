@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Web, лабораторная работа № 8: модуль GWT. Клиентская часть (пакет client)
+     компилируется в JavaScript, серверная (пакет server) работает в Tomcat. -->
+<module rename-to="issuegwt">
+  <inherits name="com.google.gwt.user.User"/>
+  <entry-point class="edu.java.issues.gwt.client.IssueEntryPoint"/>
+  <source path="client"/>
+</module>
