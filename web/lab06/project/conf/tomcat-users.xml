@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Файл conf/tomcat-users.xml отдельного Tomcat: роль и пользователь для базовой аутентификации.
+     Встроенный Tomcat (DevServer) создаёт того же пользователя в коде. -->
+<tomcat-users xmlns="http://tomcat.apache.org/xml"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://tomcat.apache.org/xml tomcat-users.xsd"
+              version="1.0">
+  <role rolename="library"/>
+  <user username="librarian" password="lib123" roles="library"/>
+</tomcat-users>

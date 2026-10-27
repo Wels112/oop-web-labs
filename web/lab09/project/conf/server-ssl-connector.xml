@@ -1,0 +1,16 @@
+<!-- Фрагмент conf/server.xml отдельного Tomcat: защищённый порт 8443.
+     Хранилище создано командой:
+     keytool -genkeypair -alias issues -keyalg RSA -keysize 2048 -validity 3650
+             -storetype PKCS12 -keystore keystore.p12 -storepass changeit
+             -dname "CN=localhost, OU=lab, O=ETU, L=Saint-Petersburg, ST=SPb, C=RU"
+     Файл keystore.p12 копируется в каталог conf Tomcat. -->
+<Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+           SSLEnabled="true" maxThreads="150" scheme="https" secure="true"
+           clientAuth="false" sslProtocol="TLS"
+           useBodyEncodingForURI="true">
+  <SSLHostConfig>
+    <Certificate certificateKeystoreFile="conf/keystore.p12"
+                 certificateKeystorePassword="changeit"
+                 certificateKeystoreType="PKCS12" type="RSA"/>
+  </SSLHostConfig>
+</Connector>

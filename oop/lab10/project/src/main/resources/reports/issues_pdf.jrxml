@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ООП, лабораторная работа № 7. Шаблон 1 (PDF): плоская таблица A4.
+     Структура данных описана XML-файлом data/issues.xml (лабораторная работа № 6):
+     выборка выражением /issues/issue, поля - дочерние элементы записи. -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="issues_pdf" pageWidth="595" pageHeight="842" columnWidth="515"
+              leftMargin="40" rightMargin="40" topMargin="40" bottomMargin="40">
+
+  <style name="base" isDefault="true" fontName="DejaVu Sans" fontSize="10"
+         pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+  <style name="head" style="base" mode="Opaque" backcolor="#2F4858" forecolor="#FFFFFF"
+         fontSize="9" isBold="true" hAlign="Left" vAlign="Middle">
+    <box leftPadding="4" rightPadding="4"/>
+  </style>
+  <style name="cell" style="base" vAlign="Middle">
+    <box leftPadding="4" rightPadding="4">
+      <bottomPen lineWidth="0.5" lineColor="#B8C4CC"/>
+    </box>
+  </style>
+
+  <field name="reader" class="java.lang.String"><fieldDescription><![CDATA[reader]]></fieldDescription></field>
+  <field name="book" class="java.lang.String"><fieldDescription><![CDATA[book]]></fieldDescription></field>
+  <field name="issued" class="java.lang.String"><fieldDescription><![CDATA[issued]]></fieldDescription></field>
+  <field name="due" class="java.lang.String"><fieldDescription><![CDATA[due]]></fieldDescription></field>
+  <field name="returned" class="java.lang.String"><fieldDescription><![CDATA[returned]]></fieldDescription></field>
+
+  <variable name="total" class="java.lang.Integer" calculation="Count">
+    <variableExpression><![CDATA[$F{reader}]]></variableExpression>
+  </variable>
+  <variable name="onHands" class="java.lang.Integer" calculation="Sum">
+    <variableExpression><![CDATA["Нет".equals($F{returned}) ? 1 : 0]]></variableExpression>
+  </variable>
+
+  <title>
+    <band height="60">
+      <staticText>
+        <reportElement x="0" y="0" width="515" height="30" style="base"/>
+        <textElement><font size="18" isBold="true"/></textElement>
+        <text><![CDATA[Картотека выдач библиотеки]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="0" y="32" width="515" height="18" style="base" forecolor="#5B6B75"/>
+        <text><![CDATA[Отчёт по списку выдач книг читателям]]></text>
+      </staticText>
+    </band>
+  </title>
+
+  <columnHeader>
+    <band height="24">
+      <staticText><reportElement x="0" y="0" width="120" height="24" style="head"/><text><![CDATA[Читатель]]></text></staticText>
+      <staticText><reportElement x="120" y="0" width="155" height="24" style="head"/><text><![CDATA[Книга]]></text></staticText>
+      <staticText><reportElement x="275" y="0" width="80" height="24" style="head"/><text><![CDATA[Выдана]]></text></staticText>
+      <staticText><reportElement x="355" y="0" width="80" height="24" style="head"/><text><![CDATA[Вернуть до]]></text></staticText>
+      <staticText><reportElement x="435" y="0" width="80" height="24" style="head"/><text><![CDATA[Возвращена]]></text></staticText>
+    </band>
+  </columnHeader>
+
+  <detail>
+    <band height="22">
+      <textField><reportElement x="0" y="0" width="120" height="22" style="cell"/><textFieldExpression><![CDATA[$F{reader}]]></textFieldExpression></textField>
+      <textField><reportElement x="120" y="0" width="155" height="22" style="cell"/><textFieldExpression><![CDATA[$F{book}]]></textFieldExpression></textField>
+      <textField><reportElement x="275" y="0" width="80" height="22" style="cell"/><textFieldExpression><![CDATA[$F{issued}]]></textFieldExpression></textField>
+      <textField><reportElement x="355" y="0" width="80" height="22" style="cell"/><textFieldExpression><![CDATA[$F{due}]]></textFieldExpression></textField>
+      <textField><reportElement x="435" y="0" width="80" height="22" style="cell"/><textFieldExpression><![CDATA[$F{returned}]]></textFieldExpression></textField>
+    </band>
+  </detail>
+
+  <pageFooter>
+    <band height="20">
+      <textField>
+        <reportElement x="0" y="2" width="515" height="16" style="base" forecolor="#5B6B75"/>
+        <textElement textAlignment="Right"><font size="8"/></textElement>
+        <textFieldExpression><![CDATA["Страница " + $V{PAGE_NUMBER}]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageFooter>
+
+  <summary>
+    <band height="40">
+      <textField>
+        <reportElement x="0" y="12" width="515" height="20" style="base"/>
+        <textElement><font isBold="true"/></textElement>
+        <textFieldExpression><![CDATA["Всего записей: " + $V{total} + ", книг на руках: " + $V{onHands}]]></textFieldExpression>
+      </textField>
+    </band>
+  </summary>
+</jasperReport>

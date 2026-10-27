@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+  <display-name>Картотека выдач, лабораторная работа № 6</display-name>
+
+  <servlet>
+    <servlet-name>process</servlet-name>
+    <servlet-class>edu.java.web.IssueProcessor</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>process</servlet-name>
+    <url-pattern>/process</url-pattern>
+  </servlet-mapping>
+
+  <!-- Лабораторная работа № 6: базовая аутентификация. Пользователи и роли
+       описаны в tomcat-users.xml отдельного Tomcat (см. каталог conf проекта). -->
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Kartoteka</web-resource-name>
+      <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>library</role-name>
+    </auth-constraint>
+  </security-constraint>
+  <login-config>
+    <auth-method>BASIC</auth-method>
+    <realm-name>Library</realm-name>
+  </login-config>
+  <security-role>
+    <role-name>library</role-name>
+  </security-role>
+
+  <jsp-config>
+    <jsp-property-group>
+      <url-pattern>*.jsp</url-pattern>
+      <page-encoding>UTF-8</page-encoding>
+    </jsp-property-group>
+  </jsp-config>
+
+  <welcome-file-list>
+    <welcome-file>ask.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
